@@ -6,8 +6,8 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <main className="flex">
       <SidebarProvider>
-        <Sidebar className="hidden h-screen w-0  bg-red-400 md:block md:w-72" />
-        <section className="h-screen flex-1 bg-yellow-200">{children}</section>
+        <Sidebar />
+        <section className="h-screen flex-1">{children}</section>
       </SidebarProvider>
     </main>
   );
