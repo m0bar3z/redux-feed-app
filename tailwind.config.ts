@@ -17,7 +17,10 @@ const config: Config = {
     },
   },
   plugins: [
-    daisyui
+    daisyui,
   ],
+  // daisyui: {
+  //   styled: false
+  // }
 };
 export default config;
