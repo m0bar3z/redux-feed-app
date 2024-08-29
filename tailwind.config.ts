@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 import type { Config } from "tailwindcss";
 import daisyui from "daisyui";
 
@@ -17,7 +18,15 @@ const config: Config = {
   },
   plugins: [daisyui],
   daisyui: {
-    themes: ["light", "dark"],
+    themes: [
+      "light",
+      {
+        black: {
+          ...require("daisyui/src/theming/themes")["black"],
+          "base-content": "#ffffff",
+        },
+      },
+    ],
   },
 };
 export default config;

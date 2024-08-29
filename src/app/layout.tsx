@@ -15,8 +15,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="dark">
+    <html lang="en" data-theme="black">
       <body className={inter.className}>{children}</body>
     </html>
   );
 }
+
+/**
+ * TODO: Daisyui custom classes
+ */

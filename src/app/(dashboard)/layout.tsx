@@ -7,7 +7,7 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
     <main className="flex">
       <SidebarProvider>
         <Sidebar />
-        <section className="h-screen flex-1">{children}</section>
+        <section className="ml-auto min-h-screen md:w-[calc(100%-288px)]">{children}</section>
       </SidebarProvider>
     </main>
   );
