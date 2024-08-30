@@ -21,8 +21,8 @@ const config: Config = {
     themes: [
       "light",
       {
-        black: {
-          ...require("daisyui/src/theming/themes")["black"],
+        dark: {
+          ...require("daisyui/src/theming/themes")["dark"],
           "base-content": "#ffffff",
         },
       },

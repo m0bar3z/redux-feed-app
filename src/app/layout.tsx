@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import StoreProvider from "@/components/StoreProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,12 +16,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="black">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" data-theme="dark">
+      <body className={inter.className}>
+        <StoreProvider>{children}</StoreProvider>
+      </body>
     </html>
   );
 }
 
 /**
  * TODO: Daisyui custom classes
+ * !daisyui black theme default styles problem!!
  */

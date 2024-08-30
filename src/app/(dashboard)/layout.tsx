@@ -1,6 +1,6 @@
+import { type ReactNode, type FC } from "react";
 import Sidebar from "@/components/dashboard/Sidebar/Sidebar";
 import SidebarProvider from "@/components/dashboard/Sidebar/SidebarProvider";
-import { type ReactNode, type FC } from "react";
 
 const Layout: FC<{ children: ReactNode }> = ({ children }) => {
   return (
