@@ -1,17 +1,24 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { posts } from "@/constants/mockData";
-import { RootState } from "@/lib/store";
-import { createAppAsyncThunk } from "@/lib/store";
+import { createAppAsyncThunk, RootState } from "@/lib/store";
+
+interface PostStateType {
+  posts: typeof posts;
+  status: "idle" | "pending" | "succeeded" | "rejected";
+  error: string | null;
+}
+
+const httpHeaders = { "Content-Type": "application/json" };
 
 export const fetchPosts = createAppAsyncThunk(
   "posts/fetchPosts",
   async () => {
-    const response = await fetch("http://localhost:3000/api", {
+    const response = await fetch("http://localhost:3000/api/posts", {
       method: "GET",
-      headers: { "Content-Type": "application/json" },
+      headers: httpHeaders,
     });
-    const result = await response.json();
 
+    const result = await response.json();
     return result;
   },
   {
@@ -22,11 +29,25 @@ export const fetchPosts = createAppAsyncThunk(
   }
 );
 
-interface PostStateType {
-  posts: typeof posts;
-  status: "idle" | "pending" | "succeeded" | "rejected";
-  error: string | null;
-}
+export const addNewLike = createAppAsyncThunk("posts/addNewLike", async (postId: string) => {
+  const response = await fetch(`http://localhost:3000/api/posts/like/${postId}`, {
+    method: "PUT",
+    headers: httpHeaders,
+  });
+
+  const result = await response.json();
+  return result;
+});
+
+export const removeLike = createAppAsyncThunk("posts/removeLike", async (postId: string) => {
+  const response = await fetch(`http://localhost:3000/api/posts/like/${postId}`, {
+    method: "DELETE",
+    headers: httpHeaders,
+  });
+
+  const result = await response.json();
+  return result;
+});
 
 const initialState: PostStateType = {
   posts: [],
@@ -63,6 +84,14 @@ const postSlice = createSlice({
       .addCase(fetchPosts.rejected, (state, action) => {
         state.status = "rejected";
         state.error = action.error.message ?? "Unknown Error";
+      })
+      .addCase(addNewLike.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.posts.map(p => (action.payload.data.id === p.id ? p.likes++ : p));
+      })
+      .addCase(removeLike.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.posts.map(p => (action.payload.data.id === p.id ? p.likes-- : p));
       });
   },
 });

@@ -4,7 +4,7 @@ import { type FC, memo, useState } from "react";
 import { HeartIcon, ChatBubbleLeftIcon } from "@heroicons/react/24/outline";
 import { HeartIcon as SolidHeartIcon } from "@heroicons/react/24/solid";
 import { useAppDispatch } from "@/lib/hooks";
-import { addLike, deleteLike } from "@/lib/features/posts/postsSlice";
+import { deleteLike, addNewLike, removeLike } from "@/lib/features/posts/postsSlice";
 
 const Actions: FC<{ id: string }> = ({ id }) => {
   const [isLiked, setIsLiked] = useState<boolean>(false);
@@ -12,12 +12,12 @@ const Actions: FC<{ id: string }> = ({ id }) => {
   const dispatch = useAppDispatch();
 
   const handleAddLike = () => {
-    dispatch(addLike(id));
+    dispatch(addNewLike(id));
     setIsLiked(true);
   };
 
   const handleRemoveLike = () => {
-    dispatch(deleteLike(id));
+    dispatch(removeLike(id));
     setIsLiked(false);
   };
 

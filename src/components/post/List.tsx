@@ -11,7 +11,7 @@ const List: FC = () => {
   const postStatus = useAppSelector(selectPostsStatus);
 
   useEffect(() => {
-    if (postStatus === "idle") dispatch(fetchPosts);
+    if (postStatus === "idle") dispatch(fetchPosts());
   }, [postStatus, dispatch]);
 
   return postStatus === "pending" ? (
